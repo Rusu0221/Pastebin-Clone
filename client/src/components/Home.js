@@ -23,6 +23,8 @@ function Home() {
         setName("")
         setDescription("")
         setTime("")
+      } else {
+        alert("Enter at least one letter or number.");
       }
     }
 
