@@ -4,7 +4,7 @@ import axios from "axios";
 function Time(props) {
     const message = props.date.substring(0, 21);
 
-    if (Date.parse(props.date) < new Date().getTime()) {
+    if (Date.parse(props.date) <= new Date().getTime()) {
         const url = 'http://localhost:4000/delete/' + props.id;
         axios.delete(url);
     }
