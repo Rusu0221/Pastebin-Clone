@@ -36,7 +36,6 @@ function Edit(props) {
         axios.delete(url);
     };
     
-
     return(
         <Box paddingY="50px">
             <Stack spacing="15px" align="start" direction="column" >
