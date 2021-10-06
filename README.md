@@ -1,1 +1,1 @@
-# Pastebin-Clone with React.js - Express.js - MongoDB
+# Pastebin-Clone with React.js - Express.js - MongoDB and styling with Chakra UI
