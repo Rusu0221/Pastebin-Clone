@@ -8,7 +8,9 @@ const Post = require("./models/Post")
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://new-user:databasesql@cluster0.01cfi.mongodb.net/pastebin-clone?retryWrites=true&w=majority", {
+const url = "mongodb+srv://new-user:databasesql@cluster0.01cfi.mongodb.net/pastebin-clone?retryWrites=true&w=majority";
+
+mongoose.connect(url, {
     useNewUrlParser: true
 });
 
