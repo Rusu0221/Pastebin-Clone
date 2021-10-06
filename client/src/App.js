@@ -1,11 +1,12 @@
-import './App.css';
+import React, {useState, createContext} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Box} from "@chakra-ui/react";
-import React, {useState} from "react";
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import List from './components/List';
 import Edit from './components/Edit';
+
+export const ChangeContext = createContext()
 
 function App() {
   const [id, setId] = useState("");
@@ -17,19 +18,17 @@ function App() {
       <Router>
         <Navbar />
         <Container maxWidth="85%" bg="white">
-          <Switch>  
-            <Route exact path="/"> <Home /> </Route>
-            <Route path="/list"> 
-              <List changeProps={(id, name, description) => {
-                setId(id) 
-                setName(name)
-                setDescription(description)
-              }} /> 
-            </Route> 
-            <Route path={"/edit:" + id}> 
-              <Edit id={id} name={name} description={description} /> 
-            </Route>     
-          </Switch>
+          <ChangeContext.Provider value={{name, description, id, setName, setDescription, setId}} >
+
+            <Switch>  
+              <Route exact path="/"> <Home /> </Route>
+              <Route path="/list"> <List /> </Route> 
+              <Route path={"/edit:" + id}> 
+                <Edit />
+              </Route>     
+            </Switch>
+
+          </ChangeContext.Provider>
         </Container> 
       </Router>
     </Box>
