@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Container, Box} from "@chakra-ui/react";
 import React, {useState} from "react";
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -12,28 +13,26 @@ function App() {
   const [description, setDescription] = useState("");
 
   return (
-    <div className="App">
+    <Box bg="blackAlpha.100">
       <Router>
-        <div>
-          <Navbar />
-          <Switch>
+        <Navbar />
+        <Container maxWidth="85%" bg="white">
+          <Switch>  
             <Route exact path="/"> <Home /> </Route>
-
             <Route path="/list"> 
               <List changeProps={(id, name, description) => {
                 setId(id) 
                 setName(name)
                 setDescription(description)
               }} /> 
-            </Route>
-            
+            </Route> 
             <Route path={"/edit:" + id}> 
-              <Edit id={id} name={name} description={description}s /> 
-            </Route>
+              <Edit id={id} name={name} description={description} /> 
+            </Route>     
           </Switch>
-        </div>
+        </Container> 
       </Router>
-    </div> 
+    </Box>
   );
 }
 

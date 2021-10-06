@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Box, Input, Textarea, Stack, Button } from "@chakra-ui/react"
 
 function Edit(props) {
     const [name, setName] = useState(props.name);
@@ -37,14 +38,30 @@ function Edit(props) {
     
 
     return(
-        <div>
-            <input value={name} onChange={(e) => {setName(e.target.value)}} disabled={disabled} />
-            <br /> <br />
-            <textarea value={description} rows="10" cols="100" onChange={(e) => {setDescription(e.target.value)}} disabled={disabled} />
-            <br />
-            <button onClick={() => {updatePost(props.id)}}>{update}</button>
-            <button onClick={() => {deletePost(props.id)}}><Link to="/"> Delete </Link></button>
-        </div>
+        <Box paddingY="50px">
+            <Stack spacing="15px" align="start" direction="column" >
+            <Input 
+                type="text" 
+                value={name} 
+                onChange={(e) => {setName(e.target.value)}} 
+                maxWidth="30%"
+                placeholder="Enter min: 1 letter or 1 number and max: 20" 
+                disabled={disabled} 
+            />
+            <Textarea 
+                value={description} 
+                rows="10" 
+                cols="100" 
+                onChange={(e) => {setDescription(e.target.value)}} 
+                placeholder="Information" 
+                disabled={disabled} 
+            />
+            <Stack spacing="20px" direction="row">
+                <Button onClick={() => {updatePost(props.id)}}>{update}</Button>
+                <Button onClick={() => {deletePost(props.id)}}><Link to="/"> Delete </Link></Button>
+            </Stack>
+            </Stack>
+        </Box>
     )
 }
 

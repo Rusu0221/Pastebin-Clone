@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Box } from "@chakra-ui/react"
 
 function Time(props) {
     const message = props.date.substring(0, 21);
@@ -9,9 +10,9 @@ function Time(props) {
         axios.delete(url);
     }
     return(
-        <div>
-            <p><strong>The post expires on: </strong>{message}</p>
-        </div>
+        <Box >
+            <Box as="h3">The post expires on: {message}</Box>
+        </Box>
     );
 }
 

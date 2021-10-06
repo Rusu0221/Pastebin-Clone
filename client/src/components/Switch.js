@@ -1,4 +1,5 @@
 import React from "react";
+import { Select, Box } from "@chakra-ui/react";
 
 function Switch({time, setTime, date}) {
       
@@ -28,8 +29,8 @@ function Switch({time, setTime, date}) {
           break
       }
     return(
-        <div>
-            <select value={time} onChange={(e) => {setTime(e.target.value)}}>
+        <Box width="20%">
+            <Select value={time} onChange={(e) => {setTime(e.target.value)}}>
                 <option value="never">Never</option>
                 <option value="10 min" >10 Minutes</option>
                 <option value="30 min" >30 Minutes</option>
@@ -38,8 +39,8 @@ function Switch({time, setTime, date}) {
                 <option value="1 week" >1 Week</option>
                 <option value="1 mounth" >1 Mounth</option>
                 <option value="1 year" >1 Year</option>
-            </select>
-        </div>
+            </Select>
+        </Box>
     );
 }
 
