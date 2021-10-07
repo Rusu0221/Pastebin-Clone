@@ -1,14 +1,24 @@
-import React, {useState} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { Box, Input, Textarea, Button, FormControl, FormLabel, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, VStack, Heading, useToast } from "@chakra-ui/react";
 import Switch from "./Switch";
+import AddData from "./AddData";
+import { ChangeContext } from "../App"
+
 
 function Home() {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
     const [time, setTime] = useState("Never")
     const toast = useToast();
     let date = new Date()
+
+    const { name, description, setName, setDescription } = useContext(ChangeContext)
+
+    useEffect(() => {
+      setName("")
+      setDescription("")
+    }, [setDescription, setName])
+  
+
 
     const add = () => {
       if(time === "Never") {
@@ -49,28 +59,12 @@ function Home() {
     }
 
   return (
-    <Box paddingY="50px">
+    <Box paddingY="30px">
+      <Heading paddingY="25px">Create new post</Heading>
       <VStack spacing="15px" align="start">
-        <FormControl isRequired>
-          <FormLabel>Name of document:</FormLabel>
-          <Input 
-            type="text" 
-            value={name} 
-            onChange={(e) => {setName(e.target.value)}} 
-            maxWidth="35%"
-            placeholder="Enter min: 1 letter or 1 number and max: 20" 
-          />
-        </FormControl>
-
-        <Textarea 
-          value={description} 
-          rows="10" cols="100" onChange={(e) => {setDescription(e.target.value)}} 
-          placeholder="Information" 
-        />
+        <AddData />
         <Switch time={time} setTime={setTime} date={date}/>
-
         <Button onClick={add}>Submit</Button>
-
       </VStack>
     </Box>
     

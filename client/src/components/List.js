@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Time from "./Time";
 import { Box, Heading, Center, VStack } from "@chakra-ui/react";
-import {ChangeContext } from "../App"
+import { ChangeContext } from "../App"
 
 function List() {
     const [post, setPost] = useState([]);
