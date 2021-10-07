@@ -1,22 +1,18 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { Button, useToast } from "@chakra-ui/react"
-
-import { ChangeContext } from "../App"
+import { Button, useToast } from "@chakra-ui/react";
+import { ChangeContext } from "../App";
+import axios from "axios";
 
 
 function Delete() {
     const toast = useToast();
-    const { id } = useContext(ChangeContext)
-    const history = useHistory()
+    const history = useHistory();
+    const { id } = useContext(ChangeContext);
 
     const deletePost = (id) => {
         const url = 'http://localhost:4000/delete/' + id;
         axios.delete(url);
-
-        history.push("/");
-
         toast({
             title: "Post deleted.",
             description: "Post was deleted successfully!",
@@ -24,11 +20,12 @@ function Delete() {
             duration: 5000,
             isClosable: true,
             position: "bottom-left"
-          })
+        });
+        history.push("/");
     };
     
-    return(
-        <Button onClick={() => {deletePost(id)}}>Delete</Button>
+    return (
+        <Button onClick={() => {deletePost(id)}}> Delete </Button>
     );
 }
 

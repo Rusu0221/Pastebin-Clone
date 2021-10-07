@@ -6,12 +6,12 @@ import Home from './components/Home';
 import List from './components/List';
 import Edit from './components/Edit';
 
-export const ChangeContext = createContext()
+export const ChangeContext = createContext();
 
 function App() {
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");  
+  const [ id, setId ] = useState("");
+  const [ name, setName ] = useState("");
+  const [ description, setDescription ] = useState("");  
 
   return (
     <Box bg="blackAlpha.100">
@@ -19,13 +19,11 @@ function App() {
         <Navbar />
         <Container maxWidth="85%" bg="white">
           <ChangeContext.Provider value={{name, description, id, setName, setDescription, setId}} >
-
             <Switch>  
               <Route exact path="/"> <Home /> </Route>
               <Route path="/list"> <List /> </Route> 
               <Route path={"/edit:" + id}> <Edit /></Route>     
             </Switch>
-
           </ChangeContext.Provider>
         </Container> 
       </Router>

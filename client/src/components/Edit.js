@@ -1,34 +1,33 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import { Box, Stack, Button, useToast } from "@chakra-ui/react"
-import { ChangeContext } from "../App"
-import Delete from "./Delete";
+import { ChangeContext } from "../App";
 import AddData from "./AddData";
-
+import Delete from "./Delete";
+import axios from "axios";
 
 function Edit() {
-    const [disabled ,setDisabled] = useState(true);
-    const [update, setUpdate] = useState("Update");
+    const [ disabled, setDisabled ] = useState(true);
+    const [ update, setUpdate ] = useState("Update");
+    const { name, description, id } = useContext(ChangeContext);
     const toast = useToast();
-    const { name, description, id } = useContext(ChangeContext)
 
     const updatePost = (id) => {
-        if(disabled) {
+        if (disabled) {
             setDisabled(false);
             setUpdate("Save");
             return;
         }
+
         const verify = /[a-zA-Z0-9]/;
-        if(verify.test(name) && name.length < 20){
+        if (verify.test(name) && name.length <= 20) {
             axios.post("http://localhost:4000/update", {
                 id: id,
                 name: name,
                 description: description
-            })
+            });
 
             setDisabled(true);   
             setUpdate("Update")
-
             toast({
                 title: "Post updated.",
                 description: "Post is updated.",
@@ -36,7 +35,7 @@ function Edit() {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-left"
-              })
+            });
         } else {
             toast({
                 title: "Post not updated.",
@@ -45,22 +44,21 @@ function Edit() {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-left"
-              })
+            });
         }
     }
     
-    return(
+    return (
         <Box paddingY="50px">
             <Stack spacing="15px" align="start" direction="column" >
-            <AddData disabled={disabled} update={update}/>
-            <Stack spacing="20px" direction="row">
-                <Button onClick={() => {updatePost(id)}}>{update}</Button>
-                <Delete />
-            </Stack>
-            
+                <AddData disabled={disabled}/>
+                <Stack spacing="20px" direction="row">
+                    <Button onClick={() => {updatePost(id)}}> {update} </Button>
+                    <Delete />
+                </Stack>
             </Stack>
         </Box>
-    )
+    );
 }
 
 export default Edit;
