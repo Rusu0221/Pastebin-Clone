@@ -14,6 +14,15 @@ mongoose.connect(url, {
     useNewUrlParser: true
 });
 
+app.get("/get", async (req, res) => {
+    Post.find({}, (err, result) => {
+        if(err) {
+            res.send(err);
+        }
+        res.send(result);
+    })
+})
+
 app.post("/post", async (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
@@ -33,16 +42,7 @@ app.post("/post", async (req, res) => {
     }
 })
 
-app.get("/get", async (req, res) => {
-    Post.find({}, (err, result) => {
-        if(err) {
-            res.send(err);
-        }
-        res.send(result);
-    })
-})
-
-app.put("/put", async (req, res) => {
+app.post("/update", async (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
     const id = req.body.id;
